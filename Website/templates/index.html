@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <title>Crop Classification</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin-top: 50px;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: #5D6D7E;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-primary {
+            background-color: #28A745;
+            border-color: #28A745;
+            font-weight: 700;
+            padding: 10px 24px;
+            margin-top: 15px;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .file-input {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .logo {
+            width: 120px; /* Logonun yeni boyutu */
+            display: block;
+            margin: auto;
+            margin-bottom: 25px;
+        }
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        #file-name {
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='results/logo/logo.png') }}" alt="Crop Classification Logo" class="logo">
+        <h1>Upload an Image for Classification</h1>
+        <form action="/" method="POST" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+            <label for="file-upload" class="custom-file-upload">
+                Choose File
+            </label>
+            <input id="file-upload" type="file" name="image" accept=".jpg, .jpeg, .png" style="display:none" onchange="updateLabel()" required>
+            <span id="file-name">No file chosen...</span>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Upload and Classify</button>
+        </form>
+    </div>
+
+    <script>
+        function updateLabel() {
+            var input = document.getElementById('file-upload');
+            var fileName = input.value.split('\\').pop();
+            document.getElementById('file-name').textContent = fileName || 'No file chosen...';
+        }
+    </script>
+</body>
+</html>
